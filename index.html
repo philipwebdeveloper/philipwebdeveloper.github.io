@@ -1,27 +1,146 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Philip - Portfolio</title>
-</head>
-<body style="font-family: Arial; max-width: 800px; margin: auto;">
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-  <h1>Hi, I'm Philip 👋</h1>
-  <p>Web Developer & Designer</p>
+const logos = Array.from({ length: 12 }).map((_, i) => ({
+  id: i + 1,
+  title: `Logo ${i + 1}`,
+  image: `https://picsum.photos/seed/logo${i + 1}/400/300`
+}));
 
-  <h2>About Me</h2>
-  <p>I build modern websites and web applications.</p>
+const testimonials = [
+  {
+    name: "Client A",
+    text: "Amazing work! The branding exceeded expectations."
+  },
+  {
+    name: "Client B",
+    text: "Fast delivery and very creative designs. Highly recommended."
+  },
+  {
+    name: "Client C",
+    text: "Professional and modern websites delivered flawlessly."
+  }
+];
 
-  <h2>Projects</h2>
-  <ul>
-    <li>Project 1 - Description</li>
-    <li>Project 2 - Description</li>
-  </ul>
+const skills = [
+  { name: "Web Design", level: 95 },
+  { name: "Frontend Development", level: 90 },
+  { name: "Branding / Logos", level: 98 },
+  { name: "UI/UX", level: 92 }
+];
 
-  <h2>Skills</h2>
-  <p>HTML, CSS, JavaScript</p>
+export default function Portfolio() {
+  const [selected, setSelected] = useState(null);
 
-  <h2>Contact</h2>
-  <p>Email: your@email.com</p>
+  return (
+    <div className="min-h-screen bg-zinc-950 text-white px-6 py-10">
+      {/* Hero */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-16"
+      >
+        <h1 className="text-5xl font-bold">Your Name</h1>
+        <p className="text-zinc-400 mt-3">
+          Web Developer • Designer • 200+ Logos Created
+        </p>
+        <div className="mt-6">
+          <Button>View My Work</Button>
+        </div>
+      </motion.div>
 
-</body>
-</html>
+      {/* Skills */}
+      <section className="mb-20">
+        <h2 className="text-2xl font-semibold mb-6">Skills</h2>
+        <div className="space-y-4">
+          {skills.map((skill, i) => (
+            <div key={i}>
+              <div className="flex justify-between text-sm mb-1">
+                <span>{skill.name}</span>
+                <span>{skill.level}%</span>
+              </div>
+              <div className="w-full bg-zinc-800 h-3 rounded-full overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${skill.level}%` }}
+                  transition={{ duration: 1 }}
+                  className="h-3 bg-gradient-to-r from-purple-500 to-blue-500"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Logo Gallery */}
+      <section className="mb-20">
+        <h2 className="text-2xl font-semibold mb-6">Logo Showcase</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {logos.map((logo) => (
+            <motion.div
+              key={logo.id}
+              whileHover={{ scale: 1.05 }}
+              className="cursor-pointer"
+              onClick={() => setSelected(logo)}
+            >
+              <Card className="bg-zinc-900 border-zinc-800">
+                <CardContent className="p-3">
+                  <img
+                    src={logo.image}
+                    alt={logo.title}
+                    className="rounded-lg"
+                  />
+                  <p className="mt-2 text-sm text-zinc-400">{logo.title}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="mb-20">
+        <h2 className="text-2xl font-semibold mb-6">Testimonials</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="bg-zinc-900 border-zinc-800">
+                <CardContent className="p-4">
+                  <p className="text-zinc-300">"{t.text}"</p>
+                  <p className="mt-3 text-sm text-zinc-500">- {t.name}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center text-zinc-500 text-sm mt-10">
+        <p>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
+        <p>Custom domain ready: philip.dev style setup supported</p>
+      </footer>
+
+      {/* Modal */}
+      {selected && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center"
+          onClick={() => setSelected(null)}
+        >
+          <div className="bg-zinc-900 p-4 rounded-lg">
+            <img src={selected.image} className="w-[500px]" />
+            <p className="text-center mt-2">{selected.title}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
