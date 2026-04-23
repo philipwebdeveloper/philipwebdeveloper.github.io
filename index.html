@@ -3,22 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Portfolio</title>
+  <title>Premium Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <style>
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
       font-family:'Inter', sans-serif;
+      scroll-behavior:smooth;
     }
 
     body{
-      background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+      background:#0b0f19;
       color:white;
       overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+    .nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      padding:20px 10%;
+      background:rgba(0,0,0,0.3);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+    }
+
+    .nav a{
+      color:white;
+      text-decoration:none;
+      margin-left:20px;
+      opacity:0.8;
+      transition:0.3s;
+    }
+
+    .nav a:hover{
+      opacity:1;
     }
 
     /* HERO */
@@ -29,23 +56,24 @@
       justify-content:center;
       align-items:center;
       text-align:center;
+      background:radial-gradient(circle at top,#1a1f3c,#0b0f19);
       padding:20px;
     }
 
     .hero h1{
-      font-size:3.5rem;
+      font-size:4rem;
       font-weight:800;
       animation:fadeUp 1s ease;
     }
 
     .hero p{
       margin-top:10px;
-      color:#b3b3b3;
+      color:#aaa;
       animation:fadeUp 1.5s ease;
     }
 
     .btn{
-      margin-top:20px;
+      margin-top:25px;
       padding:12px 25px;
       border:none;
       border-radius:30px;
@@ -59,13 +87,12 @@
       transform:scale(1.05);
     }
 
-    /* SECTIONS */
     section{
-      padding:80px 10%;
+      padding:100px 10%;
     }
 
     h2{
-      font-size:2rem;
+      font-size:2.2rem;
       margin-bottom:20px;
     }
 
@@ -91,15 +118,12 @@
     }
 
     /* SKILLS */
-    .skill{
-      margin-bottom:15px;
-    }
-
     .bar{
       height:10px;
       background:#222;
       border-radius:10px;
       overflow:hidden;
+      margin-top:5px;
     }
 
     .fill{
@@ -109,10 +133,21 @@
       animation:load 2s forwards;
     }
 
-    /* LOGOS */
-    .logo{
+    /* LOGO */
+    img{
       width:100%;
       border-radius:10px;
+    }
+
+    /* CONTACT */
+    input, textarea{
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      background:#111;
+      color:white;
     }
 
     /* FOOTER */
@@ -122,7 +157,6 @@
       color:#777;
     }
 
-    /* ANIMATIONS */
     @keyframes fadeUp{
       from{opacity:0; transform:translateY(30px)}
       to{opacity:1; transform:translateY(0)}
@@ -136,60 +170,68 @@
 </head>
 <body>
 
+  <!-- NAV -->
+  <div class="nav">
+    <div><b>Portfolio</b></div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
   <!-- HERO -->
   <div class="hero">
     <h1>Your Name</h1>
-    <p>Web Developer • Designer • 200+ Logos Created</p>
-    <button class="btn">View My Work</button>
+    <p>Web Developer • Designer • 200+ Logos</p>
+    <button class="btn" onclick="document.getElementById('work').scrollIntoView()">View Work</button>
   </div>
 
   <!-- ABOUT -->
-  <section>
+  <section id="about">
     <h2>About Me</h2>
     <div class="card">
-      I build modern websites and creative logos with clean UI, smooth animations, and strong branding identity.
+      I create modern websites and branding designs with clean UI, animations, and strong visual identity.
     </div>
   </section>
 
   <!-- SKILLS -->
-  <section>
+  <section id="skills">
     <h2>Skills</h2>
     <div class="card">
-      <div class="skill">
-        Web Design
-        <div class="bar"><div class="fill" style="--w:95%"></div></div>
-      </div>
-      <div class="skill">
-        Frontend Development
-        <div class="bar"><div class="fill" style="--w:90%"></div></div>
-      </div>
-      <div class="skill">
-        Logo Design
-        <div class="bar"><div class="fill" style="--w:98%"></div></div>
-      </div>
+      Web Design
+      <div class="bar"><div class="fill" style="--w:95%"></div></div>
+
+      Frontend Development
+      <div class="bar"><div class="fill" style="--w:90%"></div></div>
+
+      Logo Design
+      <div class="bar"><div class="fill" style="--w:98%"></div></div>
     </div>
   </section>
 
-  <!-- LOGOS -->
-  <section>
-    <h2>Logo Showcase</h2>
+  <!-- WORK -->
+  <section id="work">
+    <h2>My Work</h2>
     <div class="grid">
-      <img class="logo card" src="https://picsum.photos/400/300?1" />
-      <img class="logo card" src="https://picsum.photos/400/300?2" />
-      <img class="logo card" src="https://picsum.photos/400/300?3" />
-      <img class="logo card" src="https://picsum.photos/400/300?4" />
-      <img class="logo card" src="https://picsum.photos/400/300?5" />
-      <img class="logo card" src="https://picsum.photos/400/300?6" />
+      <div class="card"><img src="https://picsum.photos/400/300?1"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?2"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?3"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?4"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?5"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?6"></div>
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section>
-    <h2>Testimonials</h2>
-    <div class="grid">
-      <div class="card">"Amazing work! Very professional." – Client A</div>
-      <div class="card">"Clean design and fast delivery." – Client B</div>
-      <div class="card">"Best designer I’ve worked with." – Client C</div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="card">
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Your Email" />
+      <textarea rows="5" placeholder="Message"></textarea>
+      <button class="btn" style="margin-top:10px;">Send Message</button>
     </div>
   </section>
 
